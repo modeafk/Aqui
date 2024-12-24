@@ -90,9 +90,15 @@
         <p>A la niña más bonita del mundo, le deseo una feliz Navidad llena de amor, alegría y momentos inolvidables. Gracias por hacer que mi vida sea mejor solo con tu presencia. 🎄✨</p>
     </div>
 
+    <!-- Button to enable sound -->
+    <button onclick="enableSound()" style="position: absolute; top: 20px; left: 20px; z-index: 100; background-color: #ff4500; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+        Habilitar Música
+    </button>
+
     <!-- YouTube iframe for background music -->
     <iframe
-        src="https://www.youtube.com/embed/gset79KMmt0?autoplay=1&loop=1&playlist=gset79KMmt0&controls=0&mute=0"
+        id="youtubeIframe"
+        src="https://www.youtube.com/embed/gset79KMmt0?autoplay=1&loop=1&playlist=gset79KMmt0&controls=0&mute=1"
         width="0"
         height="0"
         style="border: none;"
@@ -127,6 +133,11 @@
             if (currentIndex === phrases.length - 1) {
                 document.getElementById('nextButton').textContent = "Continuar";
             }
+        }
+
+        function enableSound() {
+            const iframe = document.getElementById('youtubeIframe');
+            iframe.src = "https://www.youtube.com/embed/gset79KMmt0?autoplay=1&loop=1&playlist=gset79KMmt0&controls=0&mute=0";
         }
 
         const snowContainer = document.querySelector('.snow');
