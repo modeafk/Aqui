@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FFCCCB, #FFD700);
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff4500;
+            text-shadow: 2px 2px 5px #000;
+            margin-top: 20px;
+        }
+        .phrase-box {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            transition: transform 0.3s ease-in-out;
+        }
+        .phrase-box:hover {
+            transform: scale(1.05);
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px;
+        }
+        button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff6347;
+        }
+        .snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        .final-message {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="mainTitle">Para Ti</h1>
+    <div class="phrase-box" id="phraseBox">
+        <p id="phrase">Eres el mejor regalo que la vida me ha dado.</p>
+    </div>
+    <button id="nextButton" onclick="changePhrase()">Siguiente</button>
+
+    <div class="final-message" id="finalMessage">
+        <h1>Te quiero mucho ❤️</h1>
+        <p>A la niña más bonita del mundo, le deseo una feliz Navidad llena de amor, alegría y momentos inolvidables. Gracias por hacer que mi vida sea mejor solo con tu presencia. 🎄✨</p>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://drive.google.com/uc?export=download&id=1GyXcUUiis5oMO4afMJDGkn1zp2vJr08Z" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
+    <div class="snow"></div>
+
+    <script>
+        const phrases = [
+            "Eres el mejor regalo que la vida me ha dado.",
+            "Desde que estás en mi vida, cada día es especial.",
+            "Tu sonrisa tiene el poder de alegrar los días más grises.",
+            "En un mundo lleno de incertidumbre, tú eres mi certeza.",
+            "Eres como un poema que no necesita palabras para enamorar.",
+            "Cuando estoy contigo, todo se siente perfecto.",
+            "Eres mi refugio, mi paz, y mi mayor bendición.",
+            "Contigo aprendí que la magia existe, porque tú eres la prueba."
+        ];
+        let currentIndex = 0;
+
+        function changePhrase() {
+            currentIndex++;
+            if (currentIndex < phrases.length) {
+                document.getElementById('phrase').textContent = phrases[currentIndex];
+            } else {
+                document.getElementById('phraseBox').style.display = 'none';
+                document.getElementById('nextButton').style.display = 'none';
+                document.getElementById('finalMessage').style.display = 'block';
+            }
+
+            if (currentIndex === phrases.length - 1) {
+                document.getElementById('nextButton').textContent = "Continuar";
+            }
+        }
+
+        const snowContainer = document.querySelector('.snow');
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowContainer.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>
